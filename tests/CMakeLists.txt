@@ -10,5 +10,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(handler_tests test_A.cpp test_B.cpp)
+target_include_directories(handler_tests PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(handler_tests ${GTEST_LIBRARIES})
 add_test(NAME handler_tests COMMAND handler_tests)
