@@ -8,34 +8,34 @@ using ::testing::Exactly;
 
 TEST(ConcreteHandlerATest, HandleWhenCanHandle)
 {
-    ConcreteHandlerA handler;
+	ConcreteHandlerA handler;
 
-    EXPECT_CALL(handler, canhandle())
-        .Times(Exactly(1))
-        .WillOnce(Return(true));	//переопределяем canhandle()
+	EXPECT_CALL(handler, canhandle())
+		.Times(Exactly(1))
+		.WillOnce(Return(true));	//переопределяем canhandle()
 
-    testing::internal::CaptureStdout();
-    handler.handleRequest();
-    std::string output = testing::internal::GetCapturedStdout();
+	testing::internal::CaptureStdout();
+	handler.handleRequest();
+	std::string output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(output, "Handled by A\n");
+	EXPECT_EQ(output, "Handled by A\n");
 }
 
 TEST(ConcreteHandlerATest, HandleWhenCannotHandleCallsNext)
 {
-    auto mockSuccessor = new MockIHandler;
-    EXPECT_CALL(*mockSuccessor, handleRequest()).Times(1);
+	auto mockSuccessor = new MockIHandler;
+	EXPECT_CALL(*mockSuccessor, handleRequest()).Times(1);
 
-    ConcreteHandlerA handler;
-    handler.setHandler(mockSuccessor);
+	ConcreteHandlerA handler;
+	handler.setHandler(mockSuccessor);
 
-    EXPECT_CALL(handler, canhandle())
-        .Times(Exactly(1))
-        .WillOnce(Return(false));
+	EXPECT_CALL(handler, canhandle())
+		.Times(Exactly(1))
+		.WillOnce(Return(false));
 
-    testing::internal::CaptureStdout();
-    handler.handleRequest();
-    std::string output = testing::internal::GetCapturedStdout();
+	testing::internal::CaptureStdout();
+	handler.handleRequest();
+	std::string output = testing::internal::GetCapturedStdout();
 
-    EXPECT_TRUE(output.find("Cannot be Handled by A") != std::string::npos);
+	EXPECT_TRUE(output.find("Cannot be Handled by A") != std::string::npos);
 }

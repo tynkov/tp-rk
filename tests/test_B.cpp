@@ -5,11 +5,11 @@
 
 TEST(ConcreteHandlerBTest, HandleAlwaysHandles)
 {
-    ConcreteHandlerB handler;
+	ConcreteHandlerB handler;
 
-    testing::internal::CaptureStdout();
-    handler.handleRequest();
-    std::string output = testing::internal::GetCapturedStdout();
+	testing::internal::CaptureStdout();
+	handler.handleRequest();
+	std::string output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(output, "Handled by B\n");
+	EXPECT_EQ(output, "Handled by B\n");
 }
