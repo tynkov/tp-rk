@@ -6,4 +6,4 @@ set(CMAKE_CXX_STADARD_REQUIRED ON)
 project(handler_lib)
 
 add_library(handler_lib STATIC HandlerBase.cpp)
-target_include_directories(handler_lib PUBLUC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(handler_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
