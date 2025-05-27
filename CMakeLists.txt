@@ -21,3 +21,6 @@ if(BUILD_TESTS)
   target_link_libraries(check gtest_main handler_A handler_B)
   add_test(NAME check COMMAND check)
 endif()
+
+include(CPackConfig.cmake)
+include(CPack)

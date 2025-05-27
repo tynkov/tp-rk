@@ -1,0 +1,50 @@
+name: Release
+
+on:
+ push:
+  tags:
+  - 'v*'
+
+permissions:
+ contents: write
+
+jobs:
+ build-linux:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  - name: Configure
+    run: cmake -S. -B build -DCMAKE_BUILD_TYPE=Release
+
+  - name: Build
+    run: cmake --build build --config Release
+
+  - name: Create DEB package
+    run: |
+     cd build
+     cpack -G DEB
+
+  - name: Upload artifacts
+    uses: actions/upload-artifact@v4
+    with:
+     name: linux-packages
+     path: build/*.deb
+
+ release:
+  needs: [build-linux]
+  runs-on: ubuntu-latest
+  steps:
+  - name: Download artifacts
+    uses: actions/download-artifact@v4
+    with:
+     path: artifacts
+
+  - name: Upload GitHub Release
+    uses: softprops/action-gh-release@v1
+    with:
+     tag_name: ${{ github.ref_name }}
+     files: artifacts/**/*.*
+    env:
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
