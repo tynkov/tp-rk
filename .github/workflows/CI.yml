@@ -1,4 +1,4 @@
-name: CMake
+name: CMake & GTest
 
 on:
  push:
@@ -15,8 +15,14 @@ jobs:
   - name: Checkout repository
     uses: actions/checkout@v4
 
-  - name: Configure CMake
+  - name: Adding gtest
+    run: git clone https://github.com/google/googletest.git third-party/gtest
+
+  - name: Configure CMake with GTest
     run: cmake -H. -Bbuild
 
   - name: Build project
     run: cmake --build build
+
+  - name: Run tests
+    run: build/handler_tests

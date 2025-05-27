@@ -11,3 +11,5 @@ add_subdirectory(handler_B)
 
 add_executable(ChainOfResponsibility main.cpp)
 target_link_libraries(ChainOfResponsibility handler_A handler_B)
+
+add_subdirectory(handler_tests)
