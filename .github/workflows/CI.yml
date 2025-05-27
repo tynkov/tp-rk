@@ -25,4 +25,4 @@ jobs:
     run: cmake --build build
 
   - name: Run tests
-    run: build/handler_tests
+    run: build/check
