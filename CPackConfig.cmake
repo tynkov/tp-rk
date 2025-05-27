@@ -1,7 +1,7 @@
 include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_CONTACT "andrey.tynkov@gmail.com")
-set(CPACK_PACKAGE_VERSION "0.1.0.3")
+set(CPACK_PACKAGE_VERSION "1.0.0.0")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Chain Of Responsibility C++ Design Pattern")
 
 set(CPACK_RESOURCE_FILE_README ${CMAKE_CURRENT_SOURCE_DIR}/README.md)
